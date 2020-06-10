@@ -1,14 +1,14 @@
 dotfiles
 ========
 
-[sloria's dotfiles](https://github.com/sloria/dotfiles-old), rewritten as Ansible roles. Sets up a full local development environment with a **single command.**
+Sets up a full local development environment with a **single command.**
 
-Fully supports macOS. Red Hat and Debian support is good but not as complete.
+Support for OS X and Debian.
 
 a few neat features
 -------------------
 
-- zsh configured with [prezto](https://github.com/sorin-ionescu/prezto).
+- fish shell with 
 - nice fonts for the terminal and coding.
 - python2, python3, pipx (for managing python CLIs), pyenv (for managing Python versions), and pyenv-virtualenv (for managing virtualenvs)
 - a tmux.conf that's pretty neat.
@@ -21,9 +21,17 @@ a few neat features
 prerequisites
 -------------
 
+OS X:
+
 - homebrew (If on macOS) - **Install this first**
 - git: `brew install git`
 - ansible >= 1.6: `brew install ansible`
+
+Debian:
+
+- Updated apt cache: `apt update`
+- git: `apt install git`
+- ansible: `apt install ansible`
 
 install
 -------
