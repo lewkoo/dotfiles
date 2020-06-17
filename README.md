@@ -1,15 +1,23 @@
-dotfiles
+Levko's dotfiles
 ========
 
 Sets up a full local development environment with a **single command.**
 
-Support for OS X and Debian.
+Support for OS X and Debian. 
 
-a few neat features
+Tested on:
+
+![https://en.wikipedia.org/wiki/MacOS][osx_logo]
+
+![https://en.wikipedia.org/wiki/Ubuntu_version_history#Ubuntu_16.04_LTS_(Xenial_Xerus)][ubuntu_xenial_logo]
+
+![https://en.wikipedia.org/wiki/Ubuntu_version_history#Ubuntu_18.04_LTS_(Bionic_Beaver)][ubuntu_bionic_logo]
+
+Installs and configures
 -------------------
 
-- fish shell with 
-- nice fonts for the terminal and coding.
+- fish shell with ohmyfish and bobthefish theme
+- nice fonts for the terminal and coding
 - python2, python3, pipx (for managing python CLIs), pyenv (for managing Python versions), and pyenv-virtualenv (for managing virtualenvs)
 - a tmux.conf that's pretty neat.
 - vim with [vim-plug](https://github.com/junegunn/vim-plug) for plugin management. All configuration in a single file [.vimrc](https://github.com/sloria/dotfiles/blob/master/roles/vim/files/vimrc).
@@ -210,3 +218,7 @@ license
 -------
 
 [MIT Licensed](http://sloria.mit-license.org/).
+
+[osx_logo]: https://img.shields.io/badge/OSX-alpha-critical?style=for-the-badge&logo=apple "OS X badge"
+[ubuntu_xenial_logo]: https://img.shields.io/badge/Ubuntu16.04LTS-alpha-critical?style=for-the-badge&logo=ubuntu "Ubuntu 16.04 LTS badge"
+[ubuntu_bionic_logo]: https://img.shields.io/badge/Ubuntu18.04LTS-alpha-critical?style=for-the-badge&logo=ubuntu "Ubuntu 18.04 LTS badge"
