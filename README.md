@@ -69,7 +69,7 @@ cd ~/dotfiles
     `dot-bootstrap` script.
 
 ```
-export GIT_SIGNING_KEY_ID=631262B829DDB506
+export GIT_SIGNING_KEY_ID=FF7E2F5B2137632F
 ```
 
 Note: After running the dot-bootstrap script, you should put the above

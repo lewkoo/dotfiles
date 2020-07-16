@@ -1,0 +1,58 @@
+- name: Check if rosdep is installed
+  stat:
+    path: '/etc/ros/rosdep/sources.list.d/20-default.list'
+  register: rosdep
+
+- name: Initialize rosdep
+  become: yes
+  command: sudo rosdep init -r
+  when: not rosdep.stat.exists
+
+- name: Update rosdep
+  become_user: yes
+  command: rosdep update
+
+- name: Ensure ros is added to bashrc
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      source /opt/ros/{{ros_versions[ansible_lsb.codename]}}/setup.bash
+    insertafter: EOF
+    create: yes 
+
+- name: Check if catkin_ws is created
+  stat:
+    path: '~/catkin_ws'
+  register: catkin_ws
+
+
+- name: Create catkin_ws folder
+  file:
+    path: ~/catkin_ws/src
+    state: directory
+  become_user: yes
+  when: not catkin_ws.stat.exists
+  
+- name: Init catkin workspace
+  shell: "{{ item }}"
+  loop:
+    - source /opt/ros/{{ros_versions[ansible_lsb.codename]}}/setup.bash && catkin_init_workspace ~/catkin_ws/src
+    - source /opt/ros/{{ros_versions[ansible_lsb.codename]}}/setup.bash && catkin_make 
+  args:
+    chdir: ~/catkin_ws
+    executable: /bin/bash
+  become_user: yes
+  when: not catkin_ws.stat.exists
+
+- name: Ensure catkin_ws is added to bashrc
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      source ~/catkin_ws/devel/setup.bash
+    insertafter: EOF
+    create: yes 
+
+
+
+
+

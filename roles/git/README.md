@@ -11,11 +11,13 @@ Then, in `group_vars/local`, set `git_signing_key` to the ID of the GPG key you 
 
 ```bash
 $ gpg --list-secret-keys
-# /Users/sloria/.gnupg/secring.gpg
-# ----------------------------------
-# sec   4096R/E870EE00 2016-04-06 [expires: 2032-04-02]
-# uid                  Steven Loria <sloria1@gmail.com>
-# ssb   4096R/F9E3E72E 2016-04-06
+# /Users/lev/.gnupg/pubring.kbx
+# -----------------------------
+# sec   rsa4096 2020-07-16 [SC] [expires: 2036-07-12]
+#       FB21D86FD40CBE2B42AB5BEEFF7E2F5B2137632F
+# uid           [ unknown] Levko Ivanchuk <lewkoo@gmail.com>
+# uid           [ unknown] Levko Ivanchuk <levko@livanchuk.com>
+# ssb   rsa4096 2020-07-16 [E] [expires: 2036-07-12]
 ```
 
 ```yaml

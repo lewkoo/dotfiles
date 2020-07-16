@@ -1,0 +1,53 @@
+- name: Update repositories cache
+  become: yes
+  become_method: sudo
+  apt:
+    update_cache: yes
+
+- name: Install Python dependencies
+  become: yes
+  become_method: sudo
+  package: 
+    name: "{{item}}" 
+    state: present
+  with_items:
+    - python-minimal
+    - python-pip
+    - python3-pip
+    - python3-venv
+
+- import_role: 
+    name: ansible-pyenv
+  vars:
+    pyenv_python_versions: '{{pyenv_global_versions}}'
+    
+# - name: Check if .pyenv already exists
+#   stat: path="~/.pyenv"
+#   register: pyenv
+
+# - name: Download pyenv installer
+#   get_url: 
+#     url: https://pyenv.run 
+#     dest: /tmp/pyenv-installer.sh
+#     mode: 'u+rwx'
+#   when: not pyenv.stat.exists
+
+# - name: Execute the pyenv-installer.sh
+#   shell: /tmp/pyenv-installer.sh
+#   args:
+#     executable: /bin/bash
+#   when: not pyenv.stat.exists
+
+# - name: Reload shell
+#   shell: |
+#     export PATH="/home/vm/.pyenv/bin:$PATH"
+#     eval "$(pyenv init -)"
+#     eval "$(pyenv virtualenv-init -)"
+#     source $HOME/.profile $HOME/.bash_profile
+#   args:
+#     executable: /bin/bash
+#   when: not pyenv.stat.exists
+
+# - name: Remove the pyenv-installer.sh
+#   file: path=/tmp/pyenv-installer.sh state=absent
+#   when: not pyenv.stat.exists

@@ -1,0 +1,35 @@
+- name: Set system defaults
+  script: set-defaults.sh
+  changed_when: false
+
+- name: Add keyservers
+  become: yes
+  become_method: sudo 
+  apt_key:
+    keyserver: "{{item.url}}"
+    id: "{{item.id}}"
+  with_items: '{{ubuntu_keyservers}}'
+
+- name: Add extra sources lists
+  become: yes
+  become_method: sudo 
+  apt_repository:
+      repo: "{{item}}" 
+      state: present
+  with_items: '{{ubuntu_sources_lists}}'
+
+- name: Update repositories cache
+  become: yes
+  become_method: sudo
+  apt:
+    update_cache: yes
+
+- name: Install Ubuntu packages
+  become: yes
+  become_method: sudo
+  package: 
+    name: "{{item}}" 
+    state: present
+  with_items: '{{ubuntu_packages}}'
+
+- import_tasks: ros_config.yml
