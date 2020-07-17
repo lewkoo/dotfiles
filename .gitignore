@@ -60,3 +60,4 @@ target/
 remotehosts
 *.retry
 .DS_Store
+*.DS_Store
