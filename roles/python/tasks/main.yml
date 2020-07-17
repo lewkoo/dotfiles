@@ -27,11 +27,23 @@
   args:
     creates: "{{dotfiles_user_home}}/.local/bin/pipx"
 
+- name: Download poetry install file
+  get_url:
+    url: https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
+    dest: /tmp/get_poetry.py
+    mode: u+rwx
+    checksum: sha256:{{ python_poetry_install_checksum }}
+
 - name: Install poetry
   tags: poetry
-  shell: "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python"
+  shell: "python /tmp/get_poetry.py"
   args:
     creates: "{{dotfiles_user_home}}/.poetry/bin/poetry"
+
+- name: Remove poetry install file
+  file:
+    path: /tmp/get_poetry.py
+    state: absent
 
 # A global `virtualenv` command is needed for prezto's pyenv-virtualenv to work
 - name: Install virtualenv

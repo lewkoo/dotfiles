@@ -8,8 +8,6 @@
     - {role: python, tags: ['python']}
     - {role: node, tags: ['node']}
     - {role: hub, tags: ['hub']}
-    # - {role: vim, tags: ['vim']}
-    # - {role: zsh-autoenv, tags: ['zsh-autoenv']}
     # - {role: rg, tags: ['rg']}
     # - {role: exa, tags: ['exa']}
     # - {role: gsed, tags: ['gsed']}

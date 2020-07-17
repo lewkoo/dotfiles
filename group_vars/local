@@ -1,11 +1,9 @@
 # vi: set ft=yaml :
 
-# NOTE: The below 2 variables should not need to be changed if you cloned
-#   the dotfiles repo to '~/dotfiles'
 #  Local home directory
-dotfiles_user_home: "{{ '~' | expanduser }}"
+dotfiles_user_home: "{{ ansible_env.HOME }}"
 # Where your dotfiles live. Probably don't need to change this.
-dotfiles_home: "{{dotfiles_user_home}}/dotfiles"
+dotfiles_home: "{{ playbook_dir }}"
 
 # Name used in commit messages
 full_name: Levko Ivanchuk
@@ -162,3 +160,5 @@ pyenv_global_versions:
 
 # Python global version (must be one of the above)
 python_global_version: 3.7.4
+
+python_poetry_install_checksum: f10745a016fcd0f1e7d751d8b918ab8a6bedaf5dfd6c77d7491ca7f56af2ee13
