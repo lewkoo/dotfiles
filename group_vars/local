@@ -159,3 +159,6 @@ pyenv_global_versions:
   - 3.6.8
   - 3.5.6
   - 2.7.15
+
+# Python global version (must be one of the above)
+python_global_version: 3.7.4

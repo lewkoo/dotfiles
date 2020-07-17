@@ -5,7 +5,8 @@
 
 - name: Initialize rosdep
   become: yes
-  command: sudo rosdep init -r
+  become_method: sudo
+  command: rosdep init -r
   when: not rosdep.stat.exists
 
 - name: Update rosdep

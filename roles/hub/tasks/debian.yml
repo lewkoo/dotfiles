@@ -18,4 +18,5 @@
 
 - name: Clean hub files
   command: rm -rf /tmp/{{ hub_linux_full_version }}{,.tgz}
-  warn: no
+  args:
+    warn: no
