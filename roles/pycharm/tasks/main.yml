@@ -1,0 +1,6 @@
+# tasks file for pycharm
+---
+
+- import_tasks: install_pycharm.yml
+  vars:
+    pycharm_edition: professional

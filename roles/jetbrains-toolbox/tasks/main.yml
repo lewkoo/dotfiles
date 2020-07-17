@@ -1,0 +1,4 @@
+# tasks file for pycharm
+---
+
+- import_tasks: install_toolbox.yml
