@@ -1,4 +1,4 @@
-# This workflow verifies that ansible playbooks are completed on multiple systems
+# This workflow verifies that Ansible playbooks are completed on multiple systems
 # It does not perform any checks whether the playbook was successful and correct at setting up the system
 
 name: Verify Install
@@ -7,9 +7,9 @@ name: Verify Install
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -19,7 +19,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04] #[ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-latest]
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04] #[ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-latest]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

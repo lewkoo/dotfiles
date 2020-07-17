@@ -1,6 +1,9 @@
----
-- import_tasks: install.yml
+# TODO: Develop role for OS X
+# - import_tasks: mac.yml
+#   when: ansible_os_family == "Darwin"
 
-- import_tasks: install-extensions.yml
-
-- import_tasks: write-settings.yml
+- import_tasks: ubuntu.yml
+  vars:
+    visual_studio_code_extensions:
+      - levkoivanchuk.vscode-essentials
+  when: ansible_os_family == "Debian"
