@@ -2,12 +2,12 @@
   hosts: local
   roles:
     # Tag each role so that we can select individual roles to run with ansible-playbook --tags
-    # - {role: git, tags: ['git']}
+    - {role: git, tags: ['git']}
     - {role: fish, tags: ['fish']}
-    # - {role: package_manager, tags: ['package_manager', 'bootstrap']}
-    # - {role: python, tags: ['python']}
-    # - {role: node, tags: ['node']}
-    # - {role: hub, tags: ['hub']}
+    - {role: package_manager, tags: ['package_manager', 'bootstrap']}
+    - {role: python, tags: ['python']}
+    - {role: node, tags: ['node']}
+    - {role: hub, tags: ['hub']}
     - {role: jetbrains-toolbox, tags: ['jetbrains-toolbox']}
     - {role: pycharm, tags: ['pycharm']}
     # - {role: rg, tags: ['rg']}
@@ -18,5 +18,5 @@
     # - {role: fzf, tags: ['fzf']}
     # - {role: kubernetes, tags: ['kubernetes']}
     # - {role: jrnl, tags: ['jrnl']}
-    # - {role: macos, tags: ['macos'], when: ansible_os_family == "Darwin"}
-    # - {role: ubuntu, tags: ['ubuntu'], when ansible_os_family == "Debian"}
+    - {role: macos, tags: ['macos'], when: ansible_os_family == "Darwin"}
+    - {role: ubuntu, tags: ['ubuntu'], when ansible_os_family == "Debian"}

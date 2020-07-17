@@ -4,3 +4,4 @@
 - import_tasks: install_pycharm.yml
   vars:
     pycharm_edition: professional
+  when: ansible_os_family == "Debian"
