@@ -158,28 +158,6 @@ You can add a message to the login screen using the following command:
 sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This laptop is connected to an iCloud account and is valueless if lost. Contact (123) 456-7890 if found. Reward included."
 ```
 
-what if I only want your vim?
------------------------------
-
-First make sure you have a sane vim compiled. On macOS, the following will do:
-
-```
-brew install macvim
-```
-
-The following commands will install vim-plug and download my `.vimrc`.
-
-After backing up your `~/.vim` directory and `~/.vimrc`:
-
-```
-mkdir -p ~/.vim/autoload
-curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-curl -fLo ~/.vimrc https://raw.githubusercontent.com/sloria/dotfiles/master/roles/vim/files/vimrc
-```
-
-You will now be able to open vim and run `:PlugInstall` to install all plugins.
-
-
 troubleshooting
 ---------------
 
