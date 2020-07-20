@@ -1,0 +1,12 @@
+- name: configure | change default shell
+  user: name="{{ user_name }}" shell="/usr/local/bin/fish"
+  become: yes
+
+
+- name: Change user shell to fish 
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  become: yes
+  user:
+    name: "{{ the_user }}"
+    shell: "{{ fish.stdout }}"

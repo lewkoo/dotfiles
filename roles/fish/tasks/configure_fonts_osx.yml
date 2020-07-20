@@ -1,0 +1,11 @@
+## roles/ansible-role-fish/tasks/main.yml
+# vim:ft=yaml.ansible:
+---
+
+- name: Tap into homebrew/cask-fonts
+  homebrew_tap: tap=homebrew/cask-fonts state=present
+
+- name: Tap into homebrew/cask-versions
+  homebrew_tap: tap=homebrew/cask-versions state=present
+
+...

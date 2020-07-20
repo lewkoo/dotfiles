@@ -1,0 +1,27 @@
+---
+
+# Install
+- name: package | fish
+  package: name="{{ fish_name }}" state="{{ install_state }}"
+  tags:
+    - bootstrap
+    - bootstrap_fish
+    - install
+    - install_fish
+  become: yes
+
+# Configure
+- import_tasks: configure_default.yml
+  when: ansible_os_family == "Debian"
+- import_tasks: configure_homebrew.yml
+  when: ansible_os_family == "Darwin"
+
+# OS-agnostic configure
+# Install ohmyfish
+- import_tasks: configure_ohmyfish.yml
+# Install nerd fonts
+- import_tasks: configure_fonts_debian.yml
+  when: ansible_os_family == "Debian"
+- import_tasks: configure_fonts_osx.yml
+  when: ansible_os_family == "Darwin"
+# 

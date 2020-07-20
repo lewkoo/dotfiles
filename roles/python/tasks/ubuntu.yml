@@ -17,7 +17,7 @@
     - python3-venv
 
 - import_role: 
-    name: ansible-pyenv
+    name: pyenv
   vars:
     pyenv_global: "{{ python_global_version }} system"
     pyenv_python_versions: '{{pyenv_global_versions}}'

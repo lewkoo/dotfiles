@@ -1,3 +1,0 @@
-[submodule "roles/ansible-pyenv"]
-	path = roles/ansible-pyenv
-	url = https://github.com/markosamuli/ansible-pyenv.git

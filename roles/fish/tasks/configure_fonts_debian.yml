@@ -1,0 +1,29 @@
+## roles/ansible-role-fish/tasks/main.yml
+# vim:ft=yaml.ansible:
+---
+
+- name: Check if fonts folder exists
+  stat:
+    path: '~/.fonts'
+  register: fonts
+
+- name: Create fonts folder
+  file:
+    path: ~/.fonts
+    state: directory
+  become_user: yes
+  when: not fonts.stat.exists
+
+- name: Download Hack Nerd Font
+  unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
+    dest: ~/.fonts
+    remote_src: yes
+  when: not fonts.stat.exists
+
+- name: Update fonts cache
+  become: yes
+  command: fc-cache -fv
+  when: not fonts.stat.exists
+
+...

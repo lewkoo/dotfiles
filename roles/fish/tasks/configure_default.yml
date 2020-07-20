@@ -1,0 +1,40 @@
+- name: setup | determine shell executable location
+  command: which fish
+  register: fish
+
+- name: configure | change default shell
+  user: name="{{ user_name }}" shell="{{ fish.stdout }}"
+  become: yes
+
+- name: Change user shell to fish 
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  become: yes
+  user:
+    name: "{{ the_user }}"
+    shell: "{{ fish.stdout }}"
+
+# Configuration
+- name: Check if config.fish already exists
+  stat: path="{{dotfiles_user_home}}/.config/fish/config.fish"
+  register: config_fish
+
+- name: Back up config.fish if it exists
+  command: mv ~/.config/fish/config.fish ~/.config/fish/config.fish.bak
+  args:
+    creates: "{{dotfiles_user_home}}/.config/fish/config.fish.bak"
+  when: config_fish.stat.exists
+
+- name: Find .fish files in the repo and copy them to 
+  find:
+    paths: '{{dotfiles_home}}'
+    patterns: '*.fish'
+    recurse: "yes"
+    file_type: "file"
+  register: all_fish
+
+- name: Copy .fish configuration files in this repo to fish/conf.d
+  copy:
+    src: "{{ item.path }}"
+    dest: ~/.config/fish/conf.d/
+  with_items: "{{all_fish.files}}"
