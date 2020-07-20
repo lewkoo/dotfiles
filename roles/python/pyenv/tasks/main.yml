@@ -1,5 +1,5 @@
 ---
-# tasks file for markosamuli.pyenv
+# tasks file for pyenv
 
 - name: Load variables for the target system
   include_vars: "{{ item }}"
