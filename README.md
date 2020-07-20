@@ -30,6 +30,8 @@ Installs and configures
 prerequisites
 -------------
 
+Ansible version >= 2.8 is *required*.
+
 OS X:
 
 - homebrew (If on macOS) - **Install this first**
@@ -70,6 +72,8 @@ cd ~/dotfiles
     `dot-bootstrap` script.
 
 ```
+gpg --keyserver keys.openpgp.org --recv FF7E2F5B2137632F
+gpg --export --armor FF7E2F5B2137632F | sudo apt-key add - && sudo apt-get update  
 export GIT_SIGNING_KEY_ID=FF7E2F5B2137632F
 ```
 

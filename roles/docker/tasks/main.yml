@@ -10,8 +10,8 @@
     name: "{{ docker_package }}"
     state: "{{ docker_package_state }}"
   notify: restart docker
-  # become_method: sudo
-  # become: yes
+  become_method: sudo
+  become: yes
 
 - name: Ensure Docker is started and enabled at boot.
   service:

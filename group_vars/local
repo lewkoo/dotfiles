@@ -140,7 +140,7 @@ ubuntu_sources_lists:
   - deb http://packages.ros.org/ros/ubuntu {{ ansible_lsb.codename }} main
 
 # Apt packages to install 
-ubuntu_packages:
+ubuntu_apt_packages:
   - "{{ ros_packages | map('regex_replace', '(.*)', 'ros-'+ros_versions[ansible_lsb.codename]+'-desktop-full') | list }}"
   - python-rosdep
   - python-rosinstall
@@ -148,6 +148,13 @@ ubuntu_packages:
   - python-wstool
   - build-essential
   - python-rosdep
+
+ubuntu_snap_packages:
+  - spotify
+  - code
+  - slack
+  - chromium
+  - telegram-desktop
 
 # Python versions to install with pyenv and set as global
 # Especially useful when using tox
