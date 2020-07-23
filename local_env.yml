@@ -6,6 +6,7 @@
     - { role: fish, tags: ["fish"] }
     - { role: package_manager, tags: ["package_manager", "bootstrap"] }
     - { role: python, tags: ["python"] }
+    - { role: go, tags: ["go"] }
     - { role: node, tags: ["node"] }
     - { role: hub, tags: ["hub"] }
     - { role: jetbrains-toolbox, tags: ["jetbrains-toolbox"] }

@@ -166,6 +166,9 @@ pyenv_global_versions:
   - 2.7.15
 
 # Python global version (must be one of the above)
-python_global_version: 3.7.4
+python_global_version: 2.7.15 # Required for ROS
 
+# Install files checksums
 python_poetry_install_checksum: f10745a016fcd0f1e7d751d8b918ab8a6bedaf5dfd6c77d7491ca7f56af2ee13
+rust_checksum: 8928261388c8fae83bfd79b08d9030dfe21d17a8b59e9dcabda779213f6a3d14
+exa_checksum: 7d49e8b9c176bf5f967ff08d82d6f7e879ef42f018cd824811e68ecbc46f06d5

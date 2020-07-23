@@ -1,0 +1,31 @@
+- name: Remove exa install files
+  file:
+    path: /tmp/exa
+    state: directory
+
+- name: Download rust install file
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/exa/rust_install.sh
+    mode: u+rwx
+    checksum: sha256:{{ rust_checksum }}
+
+- name: Run rust install
+  script:
+    cmd: /tmp/exa/rust_install.sh -y -q
+
+- name: Download exa binary and move it to /usr/local/bin/exa
+  become: yes
+  unarchive:
+    src: https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip
+    dest: /usr/local/bin/
+    remote_src: yes
+
+- name: Move foo to bar
+  become: yes
+  command: mv /usr/local/bin/exa-linux-x86_64 /usr/local/bin/exa
+
+- name: Remove exa install files
+  file:
+    path: /tmp/exa
+    state: absent

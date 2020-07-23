@@ -32,12 +32,12 @@
     state: present
   with_items: '{{ubuntu_apt_packages}}'
 
-- name: Install Ubuntu APT packages
-  become: yes
-  become_method: sudo
-  snap: 
-    name: "{{item}}" 
-    state: present
-  with_items: '{{ubuntu_snap_packages}}'
+# - name: Install Ubuntu Snap packages
+#   become: yes
+#   become_method: sudo
+#   snap: 
+#     name: "{{item}}" 
+#     state: present
+#   with_items: '{{ubuntu_snap_packages}}'
 
 - import_tasks: ros_config.yml

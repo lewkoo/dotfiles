@@ -81,8 +81,18 @@
         whitespace = nowarn
 [mergetool]
         keepBackup = false
+        prompt = false
+        Kaleidoscope.cmd=ksdiff --merge --output "$MERGED" --base "$BASE" -- "$LOCAL" --snapshot "$REMOTE" --snapshot
+        Kaleidoscope.trustexitcode=true
+{% if ansible_os_family == 'Darwin' %}
+        tool = Kaleidoscope
+{% endif %}
 [difftool]
         prompt = false
+        Kaleidoscope.cmd=ksdiff --partial-changeset --relative-path "$MERGED" -- "$LOCAL" "$REMOTE"
+{% if ansible_os_family == 'Darwin' %}
+        tool = Kaleidoscope
+{% endif %}
 [push]
         # See `git help config` (search for push.default)
         # for more information on different options of the below setting.
