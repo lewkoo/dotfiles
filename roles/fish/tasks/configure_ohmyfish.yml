@@ -3,16 +3,41 @@
     path: '/etc/omf.installed'
   register: omf
 
-- name: Clone oh-my-fish repo
-  git:
-    repo: 'https://github.com/oh-my-fish/oh-my-fish'
-    dest: '/tmp/omf'
-    clone: yes
+- name: Create omf tmp directory
+  file:
+    path: /tmp/omf
+    state: directory
+  when: not omf.stat.exists
+
+- name: Download omf install file
+  get_url:
+    url: https://get.oh-my.fish
+    dest: /tmp/omf/install_omf.fish
+    mode: u+rwx
+    checksum: sha256:{{ fish_checksum }}
+  when: not omf.stat.exists
+
+- name: Determine shell executable location
+  command: which fish
+  register: fish
+
+- name: Create omf directories
+  file:
+    path: ~/.local/share/omf
+    state: directory
+  when: not omf.stat.exists
+
+- name: Create omf directories
+  file:
+    path: ~/.config/omf
+    state: directory
   when: not omf.stat.exists
 
 - name: Install oh-my-fish
   become: true
-  command: /tmp/omf/bin/install -y --offline --noninteractive
+  shell: 
+    cmd: fish /tmp/omf/install_omf.fish --path=~/.local/share/omf --config=~/.config/omf --noninteractive
+    executable: '{{fish.stdout}}'
   when: not omf.stat.exists
 
 - name: Mark oh-my-fish installed with /etc/omf.installed

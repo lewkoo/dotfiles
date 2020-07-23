@@ -82,15 +82,19 @@
 [mergetool]
         keepBackup = false
         prompt = false
-        Kaleidoscope.cmd=ksdiff --merge --output "$MERGED" --base "$BASE" -- "$LOCAL" --snapshot "$REMOTE" --snapshot
-        Kaleidoscope.trustexitcode=true
 {% if ansible_os_family == 'Darwin' %}
         tool = Kaleidoscope
+
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
 {% endif %}
 [difftool]
         prompt = false
-        Kaleidoscope.cmd=ksdiff --partial-changeset --relative-path "$MERGED" -- "$LOCAL" "$REMOTE"
 {% if ansible_os_family == 'Darwin' %}
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
         tool = Kaleidoscope
 {% endif %}
 [push]

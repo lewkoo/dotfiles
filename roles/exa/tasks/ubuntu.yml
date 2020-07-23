@@ -1,4 +1,4 @@
-- name: Remove exa install files
+- name: Create exa tmp directory
   file:
     path: /tmp/exa
     state: directory

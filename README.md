@@ -9,7 +9,7 @@ Support for OS X and Debian.
 
 Tested on:
 
-![https://en.wikipedia.org/wiki/MacOS][osx_logo]
+<!-- ![https://en.wikipedia.org/wiki/MacOS][osx_logo] -->
 
 ![https://en.wikipedia.org/wiki/Ubuntu_version_history#Ubuntu_16.04_LTS_(Xenial_Xerus)][ubuntu_xenial_logo]
 
@@ -38,11 +38,17 @@ OS X:
 - git: `brew install git`
 - ansible >= 1.6: `brew install ansible`
 
-Debian:
+Ubuntu:
 
 - Updated apt cache: `apt update`
 - git: `apt install git`
 - ansible: `apt install ansible`
+  
+> Note: On Ubuntu systems, Ansible can be updated as follows: 
+> ```bash
+> sudo apt-add-repository -yu ppa:ansible/ansible
+> sudo apt-get install ansible
+> ```
 
 install
 -------
