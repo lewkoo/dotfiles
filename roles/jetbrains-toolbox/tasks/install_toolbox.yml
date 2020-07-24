@@ -1,5 +1,4 @@
 ---
-
 - name: Check if JetBrains Toolbox is already installed
   stat:
     path: ~/.local/share/JetBrains/Toolbox
@@ -32,6 +31,12 @@
         suffix: ".jetbrains_toolbox_download"
       register: jetbrains_toolbox_download_dir
       changed_when: no
+
+    - name: Install jmespath
+      become: yes
+      tags: jmespath
+      shell: "pip install jmespath"
+      ignore_errors: yes
 
     - name: Download JetBrains Toolbox
       get_url:
