@@ -1,3 +1,13 @@
+# Install
+- name: package | fish
+  package: name="{{ fish_name }}" state="{{ install_state }}"
+  tags:
+    - bootstrap
+    - bootstrap_fish
+    - install
+    - install_fish
+  become: yes
+
 - name: configure | change default shell
   user: name="{{ user_name }}" shell="/usr/local/bin/fish"
   become: yes

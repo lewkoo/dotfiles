@@ -8,7 +8,7 @@
   file:
     path: "{{ pyenv_virtualenvwrapper_home }}"
     state: directory
-  when: pyenv_virtualenvwrapper|bool
+  when: pyenv_virtualenvwrapper
 
 - name: Create .pyenvrc
   template:

@@ -1,3 +1,26 @@
+- name: Add extra sources lists
+  become: yes
+  become_method: sudo 
+  apt_repository:
+      repo: "ppa:fish-shell/release-3" 
+      state: present
+
+- name: Update repositories cache
+  become: yes
+  become_method: sudo
+  apt:
+    update_cache: yes
+
+# Install
+- name: package | fish
+  package: name="{{ fish_name }}" state="{{ install_state }}"
+  tags:
+    - bootstrap
+    - bootstrap_fish
+    - install
+    - install_fish
+  become: yes
+
 - name: setup | determine shell executable location
   command: which fish
   register: fish

@@ -24,4 +24,4 @@
 
 - name: Initialise shell
   include_tasks: shell.yml
-  when: pyenv_init_shell|bool
+  when: pyenv_init_shell

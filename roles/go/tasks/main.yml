@@ -19,7 +19,7 @@
 - name: "Include tasks for Go Get"
   include_tasks: go-get.yml
   when: (go_get.0 is defined) and
-        (not go_uninstall|bool)
+        (not go_uninstall)
 
 - name: "Include tasks for Go Install"
   include_tasks: go-install.yml

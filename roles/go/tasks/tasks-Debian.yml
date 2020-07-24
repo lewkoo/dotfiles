@@ -1,6 +1,7 @@
 ---
 
 - name: "Go-Lang | Install dependencies"
+  become: yes
   apt:
     pkg: [ 'curl', 'gcc', 'git', 'findutils', 'make', 'rsync', 'tar' ]
     state: present

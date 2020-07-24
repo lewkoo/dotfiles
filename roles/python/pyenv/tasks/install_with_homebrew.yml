@@ -10,4 +10,4 @@
 - name: Install pyenv-virtualenvwrapper with Homebrew
   homebrew:
     name: pyenv-virtualenvwrapper
-  when: pyenv_virtualenvwrapper|bool
+  when: pyenv_virtualenvwrapper

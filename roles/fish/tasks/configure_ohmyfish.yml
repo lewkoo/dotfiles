@@ -21,27 +21,13 @@
   command: which fish
   register: fish
 
-- name: Create omf directories
-  file:
-    path: ~/.local/share/omf
-    state: directory
-  when: not omf.stat.exists
-
-- name: Create omf directories
-  file:
-    path: ~/.config/omf
-    state: directory
-  when: not omf.stat.exists
-
 - name: Install oh-my-fish
-  become: true
   shell: 
     cmd: fish /tmp/omf/install_omf.fish --path=~/.local/share/omf --config=~/.config/omf --noninteractive
-    executable: '{{fish.stdout}}'
   when: not omf.stat.exists
 
 - name: Mark oh-my-fish installed with /etc/omf.installed
-  become: true
+  become: yes
   become_method: sudo
   file:
     path: /etc/omf.installed
@@ -52,7 +38,6 @@
   register: fish
 
 - name: Install OMF packages
-  become: true
   shell: "omf install {{item}}"
   with_items: '{{fish_plugins}}'
   args:

@@ -28,4 +28,7 @@ jobs:
 
       # Run the playbook
       - name: Run the playbook
-        run: $GITHUB_WORKSPACE/bin/dot-bootstrap
+        run: |
+          pip install jmespath
+          pip3 install jmespath
+          $GITHUB_WORKSPACE/bin/dot-bootstrap
