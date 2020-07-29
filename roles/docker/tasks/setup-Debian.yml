@@ -6,6 +6,10 @@
       - docker-engine
     state: absent
 
+- name: Update repositories cache
+  apt:
+    update_cache: yes
+
 - name: Ensure dependencies are installed.
   apt:
     name:

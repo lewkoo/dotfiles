@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      
+  roles:
+    # Tag each role so that we can select individual roles to run with ansible-playbook --tags
+    # - { role: package_manager, tags: ["package_manager", "bootstrap"] }
+    # - { role: git, tags: ["git"] }
+    # - { role: fish, tags: ["fish"] }
+    # - { role: python, tags: ["python"] }
+    # - { role: go, tags: ["go"] }
+    # - { role: node, tags: ["node"] }
+    # - { role: hub, tags: ["hub"] }
+    # - { role: jetbrains-toolbox, tags: ["jetbrains-toolbox"] }
+    # - { role: pycharm, tags: ["pycharm"] }
+    # - { role: vscode, tags: ["vscode"] }
+    - { role: exa, tags: ['exa'] }
+    # - { role: gsed, tags: ['gsed'] }
+    - { role: bat, tags: ['bat'] }
+    # - { role: tmux, tags: ['tmux'] }
+    # - { role: fzf, tags: ['fzf'] }
+    - { role: docker, tags: ['docker'] }
+    # - { role: kubernetes, tags: ['kubernetes'] }
+    # - { role: macos, tags: ["macos"], when: ansible_os_family == "Darwin" }
+    # - { role: ubuntu, tags: ["ubuntu"], when ansible_os_family == "Debian" }

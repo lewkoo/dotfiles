@@ -1,7 +1,12 @@
+# - name: Check if exa is installed
+#   command: command -v exa >/dev/null 2>&1
+#   register: exa_missing
+#   ignore_errors: yes
+
 - import_tasks: ubuntu.yml
-  when: ansible_os_family == "Debian"
+  when: ansible_os_family == "Debian" # and not exa_missing|bool
 
 - name: Install exa with Homebrew
   homebrew: name=exa state=present
-  when: ansible_os_family == "Darwin"
+  when: ansible_os_family == "Darwin" # and not exa_missing|bool
 
