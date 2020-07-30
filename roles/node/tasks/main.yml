@@ -1,4 +1,22 @@
+- name: Update apt cache.
+  apt: update_cache=true cache_valid_time=600
+  when: ansible_os_family == 'Debian'
 
+- name: Install apt-transport-https
+  become: yes
+  become_method: sudo 
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Install gpg-agent  
+  become: yes
+  become_method: sudo 
+  apt:
+    name: gpg-agent  
+    state: present
+  ignore_errors: yes
+  
 - name: Install the gpg key for nodejs LTS
   become: yes
   become_method: sudo 

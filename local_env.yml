@@ -9,7 +9,7 @@
     - { role: go, tags: ["go"] }
     - { role: node, tags: ["node"] }
     - { role: hub, tags: ["hub"] }
-    - { role: jetbrains-toolbox, tags: ["jetbrains-toolbox"] }
+    # - { role: jetbrains-toolbox, tags: ["jetbrains-toolbox"] }
     - { role: pycharm, tags: ["pycharm"] }
     - { role: vscode, tags: ["vscode"] }
     - { role: exa, tags: ['exa'] }

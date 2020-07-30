@@ -1,11 +1,5 @@
 # tasks file for pycharm
 ---
 
-- name: Install git with apt
-  apt: name=python-jmespath state=present
-  become: true
-  become_method: sudo
-  when: ansible_os_family == "Debian"
-
 - import_tasks: install_toolbox.yml
   when: ansible_os_family == "Debian"

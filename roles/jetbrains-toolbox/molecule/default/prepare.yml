@@ -1,0 +1,70 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
+    - name: Install pip with apt
+      apt: name=python-pip state=present
+      become: true
+      become_method: sudo
+      when: ansible_os_family == "Debian"
+
+    - name: Install setuptools with apt
+      apt: name=python-setuptools state=present
+      become: true
+      become_method: sudo
+      when: ansible_os_family == "Debian"
+
+    - name: Install jmespath with apt
+      apt: name=python-jmespath state=present
+      become: true
+      become_method: sudo
+      when: ansible_os_family == "Debian"
+
+    - name: Install pip3 with apt
+      apt: name=python3-pip state=present
+      become: true
+      become_method: sudo
+      when: ansible_os_family == "Debian"
+
+    - name: Install setuptools with apt
+      apt: name=python3-setuptools state=present
+      become: true
+      become_method: sudo
+      when: ansible_os_family == "Debian"
+
+    - name: Install jmespath with apt
+      apt: name=python3-jmespath state=present
+      become: true
+      become_method: sudo
+      when: ansible_os_family == "Debian"
+
+    - name: Install setuptools
+      pip:
+        name: setuptools
+
+    - name: Install jmespath
+      pip:
+        name: jmespath
+
+    # - name: Install pip dependencies
+    #   command: pip install jmespath setuptools
+
+    # - name: Install pip3 dependencies
+    #   command: pip3 install jmespath setuptools
+
+    - name: Download JSON content play
+      uri:
+        url: https://jsonplaceholder.typicode.com/users
+        return_content: yes
+      register: jsoncontent
+
+
+    - name: Business Card
+      debug: msg="{{ jsoncontent.json | json_query(jmesquery) }}"
+      vars:
+        jmesquery: "[*].{Name: name, Email: email, Phone: phone, CompanyName: company.name, WebSite: website, City: address.city}"

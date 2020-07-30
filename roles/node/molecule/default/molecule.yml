@@ -1,0 +1,26 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: Ubuntu-16-04-Xenial
+    image: "geerlingguy/docker-ubuntu1604-ansible:latest"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+  - name: Ubuntu-18-04-Bionic
+    image: "geerlingguy/docker-ubuntu1804-ansible:latest"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+provisioner:
+  name: ansible
+  log: true
+  inventory:
+    links:
+      group_vars: ../../../../group_vars/ # These are the 'global' group_vars as described above.
+verifier:
+  name: ansible
