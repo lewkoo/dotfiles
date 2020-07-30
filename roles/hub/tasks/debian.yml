@@ -20,3 +20,4 @@
   command: rm -rf /tmp/{{ hub_linux_full_version }}{,.tgz}
   args:
     warn: no
+  when: not hub_stat.stat.exists
