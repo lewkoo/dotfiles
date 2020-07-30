@@ -1,5 +1,10 @@
 ---
-
+- name: Update repositories cache
+  become: yes
+  become_method: sudo
+  apt:
+    update_cache: yes
+    
 - name: "Go-Lang | Install dependencies"
   become: yes
   apt:
