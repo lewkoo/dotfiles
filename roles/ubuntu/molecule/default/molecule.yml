@@ -24,20 +24,3 @@ provisioner:
       group_vars: ../../../../group_vars/ # These are the 'global' group_vars as described above.
 verifier:
   name: ansible
-
-# Disable idempotence test for git role
-scenario:
-    test_sequence:
-    - dependency
-    - lint
-    - cleanup
-    - destroy
-    - syntax
-    - create
-    - prepare
-    - converge
-    # - idempotence
-    - side_effect
-    - verify
-    - cleanup
-    - destroy

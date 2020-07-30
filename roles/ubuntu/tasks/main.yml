@@ -1,3 +1,14 @@
+
+# dirmngr
+
+- name: Update repositories cache
+  apt:
+    update_cache: yes
+
+- name: Ensure dirmngr is present
+  become: yes
+  package: name=dirmngr state=present
+
 - name: Set system defaults
   script: set-defaults.sh
   changed_when: false

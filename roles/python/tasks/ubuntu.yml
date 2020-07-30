@@ -1,6 +1,5 @@
 - name: Update repositories cache
   become: yes
-  become_method: sudo
   apt:
     update_cache: yes
 
