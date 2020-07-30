@@ -21,9 +21,12 @@
     remote_src: yes
   when: not fonts.stat.exists
 
+- name: Ensure fontconfig is present
+  become: yes
+  package: name=fontconfig state=present
+
 - name: Update fonts cache
   become: yes
   command: fc-cache -fv
   when: not fonts.stat.exists
 
-...

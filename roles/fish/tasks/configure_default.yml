@@ -1,15 +1,32 @@
-- name: Add extra sources lists
-  become: yes
-  become_method: sudo 
-  apt_repository:
-      repo: "ppa:fish-shell/release-3" 
-      state: present
+- name: Check if fish is installed
+  stat:
+    path: '/etc/fish.installed'
+  register: fish_installed
 
 - name: Update repositories cache
   become: yes
   become_method: sudo
   apt:
     update_cache: yes
+  when: not fish_installed.stat.exists
+
+- name: Ensure dirmngr is present
+  become: yes
+  package: name=dirmngr state=present
+  when: not fish_installed.stat.exists
+
+- name: Ensure unzip is present
+  become: yes
+  package: name=unzip state=present
+  when: not fish_installed.stat.exists
+
+- name: Add extra sources lists
+  become: yes
+  apt_repository:
+      repo: "ppa:fish-shell/release-3" 
+      state: present
+      update_cache: true
+  when: not fish_installed.stat.exists
 
 # Install
 - name: package | fish
@@ -20,14 +37,17 @@
     - install
     - install_fish
   become: yes
+  when: not fish_installed.stat.exists
 
 - name: setup | determine shell executable location
   command: which fish
   register: fish
+  when: not fish_installed.stat.exists
 
 - name: configure | change default shell
   user: name="{{ user_name }}" shell="{{ fish.stdout }}"
   become: yes
+  when: not fish_installed.stat.exists
 
 - name: Change user shell to fish 
   vars:
@@ -36,28 +56,39 @@
   user:
     name: "{{ the_user }}"
     shell: "{{ fish.stdout }}"
+  when: not fish_installed.stat.exists
 
 # Configuration
 - name: Check if config.fish already exists
-  stat: path="{{dotfiles_user_home}}/.config/fish/config.fish"
+  stat: path= "{{ dotfiles_user_home }}"/.config/fish/config.fish
   register: config_fish
 
 - name: Back up config.fish if it exists
-  command: mv ~/.config/fish/config.fish ~/.config/fish/config.fish.bak
+  command: mv {{dotfiles_user_home}}/.config/fish/config.fish {{dotfiles_user_home}}/.config/fish/config.fish.bak
   args:
     creates: "{{dotfiles_user_home}}/.config/fish/config.fish.bak"
   when: config_fish.stat.exists
 
 - name: Find .fish files in the repo and copy them to 
   find:
-    paths: '{{dotfiles_home}}'
+    paths: "{{dotfiles_home}}"
     patterns: '*.fish'
     recurse: "yes"
     file_type: "file"
   register: all_fish
+  when: not fish_installed.stat.exists
 
 - name: Copy .fish configuration files in this repo to fish/conf.d
   copy:
     src: "{{ item.path }}"
-    dest: ~/.config/fish/conf.d/
+    dest: "{{dotfiles_user_home}}/.config/fish/conf.d/"
   with_items: "{{all_fish.files}}"
+  when: not fish_installed.stat.exists
+
+- name: Mark fish installed with /etc/fish.installed
+  become: yes
+  become_method: sudo
+  file:
+    path: /etc/fish.installed
+    state: touch
+  when: not fish_installed.stat.exists
