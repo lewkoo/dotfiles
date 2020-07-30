@@ -2,13 +2,11 @@
 - name: Update apt cache
   apt: 
     update_cache: yes
-    force_apt_get: yes
   when: package_update
   become: yes
 
 - name: Upgrade apt packages
   apt: 
     upgrade: yes
-    force_apt_get: yes
   when: package_upgrade
   become: yes
