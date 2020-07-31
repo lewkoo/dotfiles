@@ -1,7 +1,6 @@
 # This workflow verifies that Ansible playbooks are completed on multiple systems
-# It does not perform any checks whether the playbook was successful and correct at setting up the system
 
-name: Verify Install
+name: Unit Tests
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -28,25 +27,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # Install dependencies
       - name: Install dependencies
         run: |
+          sudo apt-get install -y python3-pip libssl-dev
           pip install jmespath
           pip3 install jmespath
-
-      # Run the playbook
-      - name: Run playbook
-        uses: dawidd6/action-ansible-playbook@v2
-        with:
-          playbook: local_env.yml
-          directory: ./
-          options: |
-            -i ./hosts
-            --skip-tags "bootstrap" 
-            --ask-become-pass
-            -e "ansible_python_interpreter=/usr/bin/python3"
-            --verbose
-      # - name: Run the playbook
-      #   run: |
-      #     pip install jmespath
-      #     pip3 install jmespath
-      #     ansible_playbook -i $GITHUB_WORKSPACE/hosts $GITHUB_WORKSPACE/local_env.yml 
+          sudo apt-get install python3-venv
+          python3 -m venv $GITHUB_WORKSPACE/molecule
+          source $GITHUB_WORKSPACE/molecule/bin/activate
+          pip install "molecule[lint]"
+          pip install "molecule[docker]"
+      # Run Unit tests
+      - name: Run Unit tests
+        run: |
+          source $GITHUB_WORKSPACE/molecule/bin/activate
+          (cd $GITHUB_WORKSPACE && ./bin/test)

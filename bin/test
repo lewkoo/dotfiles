@@ -1,0 +1,7 @@
+#!/bin/bash
+for d in ./roles/*/ ; do
+    if [[ "$d" != "./roles/all/" || "$d" != "./roles/ansible/" ]]; then
+        echo "$d"   
+        (cd "$d" && molecule test)
+    fi
+done

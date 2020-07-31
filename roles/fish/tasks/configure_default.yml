@@ -38,6 +38,7 @@
     - install_fish
   become: yes
   when: not fish_installed.stat.exists
+  
 
 - name: setup | determine shell executable location
   command: which fish
