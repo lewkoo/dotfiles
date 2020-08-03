@@ -2,6 +2,6 @@
 for d in ./roles/*/ ; do
     if [[ "$d" != "./roles/all/" || "$d" != "./roles/ansible/" ]]; then
         echo "$d"   
-        (cd "$d" && molecule test)
+        (export LC_ALL=C.UTF-8 && export LANG=C.UTF-8 && cd "$d" && molecule test)
     fi
 done

@@ -10,7 +10,7 @@ on:
   pull_request:
     branches: [master]
   schedule: 
-    - cron: 0 6 */1 * *
+    - cron: 0 6 * */1 4
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,11 +30,14 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: |
-          sudo apt-get install -y python3-pip libssl-dev
-          pip install jmespath
-          pip3 install jmespath
-          sudo apt-get install python3-venv
-          python3 -m venv $GITHUB_WORKSPACE/molecule
+          export LC_ALL=C.UTF-8
+          export LANG=C.UTF-8
+          apt-get update
+          apt-get install -y python-pip python-minimal python3-pip python3-venv libssl-dev
+          pip install --upgrade pip && pip3 install --upgrade pip
+          pip install wheel && pip3 install wheel
+          pip install jmespath && pip3 install jmespath
+          python3 -m venv $GITHUB_WORKSPACE/molecule --system-site-packages
           source $GITHUB_WORKSPACE/molecule/bin/activate
           pip install "molecule[lint]"
           pip install "molecule[docker]"
