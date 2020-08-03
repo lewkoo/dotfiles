@@ -3,6 +3,17 @@
   apt:
     update_cache: yes
 
+- name: Ensure dirmngr is present
+  become: yes
+  package: name=dirmngr state=present
+
+- name: Add extra sources lists
+  become: yes
+  become_method: sudo 
+  apt_repository:
+      repo: ppa:deadsnakes/ppa
+      state: present
+
 - name: Install Python dependencies
   become: yes
   become_method: sudo
@@ -11,13 +22,12 @@
     name: "{{item}}" 
     state: present
   with_items:
-    - python-minimal
-    - python-pip
     - python3-pip
-    - python3-venv
+    - python-pip
+    - python3.8
 
-- import_role: 
-    name: ./python/pyenv
-  vars:
-    pyenv_global: "{{ python_global_version }} system"
-    pyenv_python_versions: '{{pyenv_global_versions}}'
+# - import_role: 
+#     name: ./python/pyenv
+#   vars:
+#     pyenv_global: "{{ python_global_version }} system"
+#     pyenv_python_versions: '{{pyenv_global_versions}}'
