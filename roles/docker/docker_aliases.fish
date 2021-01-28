@@ -1,35 +1,35 @@
-alias d="docker "
-alias dlog="docker logs -f --tail 100 "
-alias dl="docker logs -f --tail 100 "
-alias ddf="docker system df"
+abbr -a -g d docker 
+abbr -a -g dlog docker logs -f --tail 100 
+abbr -a -g dl docker logs -f --tail 100 
+abbr -a -g ddf docker system df
 # Stop and remove a single container
-alias drm='docker rm -f '
+abbr -a -g drm docker rm -f 
 # Stop and remove all running containers
-alias drm!='docker rm -f $(docker ps -a -q)'
+abbr -a -g drm! docker rm -f (docker ps -a -q)
 
-alias dc="docker-compose"
-alias dcup="docker-compose up -d "
-alias dcrun="docker-compose run --rm "
-function dcdebug {
-  docker-compose kill $1
-  docker-compose run --service-ports $1
-}
+abbr -a -g dc docker-compose
+abbr -a -g dcup docker-compose up -d 
+abbr -a -g dcrun docker-compose run --rm 
+function dcdebug
+  docker-compose kill $argv
+  docker-compose run --service-ports $argv
+end
 # Stop and recreate a container
-alias dcre="docker-compose up -d --force-recreate --no-deps "
-alias dcl="docker-compose logs -f --tail 100 "
+abbr -a -g dcre docker-compose up -d --force-recreate --no-deps 
+abbr -a -g dcl docker-compose logs -f --tail 100 
 
-alias ds="docker-sync"
-alias dss="docker-sync start"
-alias dsx="docker-sync stop"
+abbr -a -g ds docker-sync
+abbr -a -g dss docker-sync start
+abbr -a -g dsx docker-sync stop
 
-alias dcbomb!="docker-compose down -v"
+abbr -a -g dcbomb! docker-compose down -v
 
 # Open bash in a container. Pass docker-compose name
-function dcbash {
-  docker-compose exec $1 /bin/bash
-}
+function dcbash
+  docker-compose exec $argv /bin/bash
+end
 
 # Open bash in a container. Pass container name
-function dbash {
-  docker exec -it $1 /bin/bash
-}
+function dbash
+  docker exec -it $argv /bin/bash
+end
