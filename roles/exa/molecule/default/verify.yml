@@ -4,6 +4,5 @@
 - name: Verify
   hosts: all
   tasks:
-  
   - name: Check that exa is installed
     command: exa
