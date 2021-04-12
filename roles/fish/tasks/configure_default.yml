@@ -1,6 +1,6 @@
 - name: Check if fish is installed
   stat:
-    path: '/etc/fish.installed'
+    path: "/etc/fish.installed"
   register: fish_installed
 
 - name: Update repositories cache
@@ -23,9 +23,9 @@
 - name: Add extra sources lists
   become: yes
   apt_repository:
-      repo: "ppa:fish-shell/release-3" 
-      state: present
-      update_cache: true
+    repo: "ppa:fish-shell/release-3"
+    state: present
+    update_cache: true
   when: not fish_installed.stat.exists
 
 # Install
@@ -38,7 +38,6 @@
     - install_fish
   become: yes
   when: not fish_installed.stat.exists
-  
 
 - name: setup | determine shell executable location
   command: which fish
@@ -50,7 +49,7 @@
   become: yes
   when: not fish_installed.stat.exists
 
-- name: Change user shell to fish 
+- name: Change user shell to fish
   vars:
     the_user: "{{ ansible_user_id }}"
   become: yes
@@ -70,10 +69,10 @@
     creates: "{{dotfiles_user_home}}/.config/fish/config.fish.bak"
   when: config_fish.stat.exists
 
-- name: Find .fish files in the repo and copy them to 
+- name: Find .fish files in the repo and copy them to fish/conf.d
   find:
-    paths: "{{dotfiles_home}}"
-    patterns: '*.fish'
+    paths: "{{ dotfiles_home }}"
+    patterns: "*.fish"
     recurse: "yes"
     file_type: "file"
   register: all_fish
@@ -84,6 +83,23 @@
     src: "{{ item.path }}"
     dest: "{{dotfiles_user_home}}/.config/fish/conf.d/"
   with_items: "{{all_fish.files}}"
+  when: not fish_installed.stat.exists
+
+# Find completions files and copy them
+- name: Find .fish completions files in the repo and copy them to fish/completions
+  find:
+    paths: "{{dotfiles_home}}"
+    patterns: "completions/*.fish"
+    recurse: "yes"
+    file_type: "file"
+  register: fish_completions
+  when: not fish_installed.stat.exists
+
+- name: Copy .fish configuration files in this repo to fish/completions
+  copy:
+    src: "{{ item.path }}"
+    dest: "{{dotfiles_user_home}}/.config/fish/completions/"
+  with_items: "{{fish_completions.files}}"
   when: not fish_installed.stat.exists
 
 - name: Mark fish installed with /etc/fish.installed

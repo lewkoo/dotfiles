@@ -43,3 +43,6 @@ end
 function dir!
   docker image rm (docker image ls -q)
 end
+
+set -g -x COMPOSE_DOCKER_CLI_BUILD 1
+set -g -x DOCKER_BUILDKIT 1
