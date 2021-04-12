@@ -1,4 +1,9 @@
 ---
+- name: Install prerequisites for Ansible to install .deb via apt module
+  apt:
+    name:
+    - xz-utils
+    update_cache: yes
 
 - name: Check if bat is installed
   command: dpkg-query -W bat

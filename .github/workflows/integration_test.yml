@@ -34,11 +34,9 @@ jobs:
           # export LANG=C.UTF-8
           apt-get update
           apt-get install -y python-pip python-minimal python3-pip python3-venv libssl-dev
-          pip install --upgrade pip && pip3 install --upgrade pip
-          pip install wheel && pip3 install wheel
-          pip install jmespath && pip3 install jmespath
           python3 -m venv $GITHUB_WORKSPACE/molecule --system-site-packages
           source $GITHUB_WORKSPACE/molecule/bin/activate
+          pip install --upgrade pip wheel setuptools jmespath
           pip install "molecule[lint]"
           pip install "molecule[docker]"
       # Run Integration tests

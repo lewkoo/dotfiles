@@ -57,6 +57,9 @@ target/
 
 .vagrant
 
+# Testing virtual environment
+dotfiles/
+
 remotehosts
 *.retry
 .DS_Store

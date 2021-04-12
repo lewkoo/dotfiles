@@ -33,12 +33,12 @@ Installs and configures
 - github hub tool
 - node-js
 - jetbrains-toolbox and pycharm
-- Mac packages installed with [homebrew][]. Mac apps installed with [homebrew-cask][] and [mas][].
-- Basic Ubuntu packages from both APT and Snap and [ROS](http://wiki.ros.org) setup. 
-- Useful git aliases.
+- Mac packages installed with [homebrew][https://brew.sh/]. Mac apps installed with [homebrew-cask][https://github.com/Homebrew/homebrew-cask] and [mas][].
+- Basic Ubuntu packages from both APT and Snap and [ROS](http://wiki.ros.org) setup
+- Useful git aliases
 - Optional git commit signing with GPG
 - Roles are unit tested and integration tested by [molecule](https://molecule.readthedocs.io/en/latest/).
-- pluggable. Everything is optional. Fork this. Remove what you don't use. Configure what you do use.
+- Pluggable. Everything is optional. Fork this. Remove what you don't use. Configure what you do use.
 
 prerequisites
 -------------
@@ -68,7 +68,7 @@ Ubuntu:
 install
 -------
 
-- [Fork](https://github.com/sloria/dotfiles/fork) this repo.
+- [Fork](https://github.com/lewkoo/dotfiles/fork) this repo.
 - Clone your fork.
 
 ```bash
@@ -79,7 +79,7 @@ cd ~/dotfiles
 ```
 
 - Update the following variables in `group_vars/local` (at a minimum)
-  - `full_name`: Your name, which will be attached to commit messages, e.g. "Steven Loria"
+  - `full_name`: Your name, which will be attached to commit messages, e.g. "Levko Ivanchuk"
   - `git_user`: Your Github username.
   - `git_email`: Your git email address.
 - Optional, but recommended: Update `group_vars/local` with the programs you want installed by [homebrew][], [homebrew-cask][], and npm.
