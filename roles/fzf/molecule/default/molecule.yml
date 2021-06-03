@@ -16,6 +16,12 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
+  - name: Ubuntu-20-04-Focal-Fossa
+    image: "geerlingguy/docker-ubuntu2004-ansible:latest"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
 provisioner:
   name: ansible
   log: true
@@ -24,4 +30,3 @@ provisioner:
       group_vars: ../../../../group_vars/ # These are the 'global' group_vars as described above.
 verifier:
   name: ansible
-  

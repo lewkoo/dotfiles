@@ -1,5 +1,0 @@
-# tasks file for pycharm
----
-
-- import_tasks: install_toolbox.yml
-  when: ansible_os_family == "Debian"

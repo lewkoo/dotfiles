@@ -21,11 +21,12 @@
 #     dest: "{{dotfiles_user_home}}/pytest.ini"
 #     state: link
 
-- name: Update pip
-  shell: pip install --upgrade pip
+# - name: Update pip
+#   shell: pip install --upgrade pip
 
 - name: Update pip3
   shell: pip3 install --upgrade pip
+  when: ansible_distribution_major_version != "16"
 
 - name: Install pipx
   tags: pipx
@@ -33,6 +34,7 @@
   args:
     creates: "{{dotfiles_user_home}}/.local/bin/pipx"
   ignore_errors: yes
+  when: ansible_distribution_major_version != "16"
 
 - name: Download poetry install file
   get_url:
@@ -40,23 +42,27 @@
     dest: /tmp/get_poetry.py
     mode: u+rwx
     checksum: sha256:{{ python_poetry_install_checksum }}
+  when: ansible_distribution_major_version != "16"
 
 - name: Install poetry
   tags: poetry
   shell: "python3 /tmp/get_poetry.py"
   args:
     creates: "{{dotfiles_user_home}}/.poetry/bin/poetry"
+  when: ansible_distribution_major_version != "16"
 
 - name: Remove poetry install file
   file:
     path: /tmp/get_poetry.py
     state: absent
+  when: ansible_distribution_major_version != "16"
 
 # A global `virtualenv` command is needed for prezto's pyenv-virtualenv to work
 - name: Install virtualenv
   shell: "python3 -m pip install virtualenv"
   args:
     creates: "/usr/local/bin/virtualenv"
+  when: ansible_distribution_major_version != "16"
 
 # - name: Load dist-packages to PYTHONPATH
 #   blockinfile:

@@ -4,6 +4,5 @@
 - name: Verify
   hosts: all
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+  - name: Verify that hub is installed
+    shell: which hub

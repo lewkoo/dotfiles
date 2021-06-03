@@ -19,3 +19,5 @@ go_build_script: make.bash
 # Go get
 go_get: []
 go_install: []
+
+golang_shell_profile: ~/.bashrc

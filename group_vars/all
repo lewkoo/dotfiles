@@ -143,11 +143,10 @@ ubuntu_sources_lists:
 ubuntu_apt_packages:
   - ros-{{ ros_versions[ansible_lsb.codename] }}-desktop-full
   - python-rosdep
-  - python-rosinstall
-  - python-rosinstall-generator
-  - python-wstool
+  - python-rospkg
+  - python3-rosdep
+  - python3-rospkg
   - build-essential
-  - python-rosdep
   - dnsutils
   - iproute2
   - iputils-ping
@@ -176,10 +175,6 @@ ubuntu_apt_packages:
   - gnupg2
   - lib32z1
   - texinfo
-  - libsqlite3-dev
-  - libc++-dev
-  - libc++abi-dev
-  - libicu55
   - curl
   - file
   - ftp
@@ -200,8 +195,6 @@ ubuntu_apt_packages:
   - flex
   - patchelf
   - bzip2
-  - sqlite3
-  - libcurl3
 
 ubuntu_snap_packages:
   - spotify
@@ -221,7 +214,7 @@ python_global_version: 2.7.15 # Required for ROS
 
 # Install files checksums
 # All are SHA 256
-python_poetry_install_checksum: 7130d1230f1fe8f3ab6091f5efb17027a4757f1ae6a6c475edd1094fcc1839d7
+python_poetry_install_checksum: 6e0b57c76d27e3bea0ad12db7bb8cc4c6eabb7dad361bf6180441253d6bd383c
 rust_checksum: fa50ccf79c30ce9446cc45917e8ea10655674c2a9509221cb12bd865c60ab709
 exa_checksum: 7d49e8b9c176bf5f967ff08d82d6f7e879ef42f018cd824811e68ecbc46f06d5
 fish_checksum: bb1f4025934600ea6feef2ec11660e17e2b6449c5a23c033860aed712ad328c9
